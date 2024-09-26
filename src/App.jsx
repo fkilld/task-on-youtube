@@ -2,9 +2,9 @@ import Header from './components/Header'
 import AddTask from './components/AddTask'
 import ShowTask from './components/ShowTask'
 import { useState, useEffect } from 'react'
-
+import './App.css'
 function App() {
-  const [task, setTask] = useState()
+  const [task, setTask] = useState('')
   const [taskList, setTaskList] = useState(
     JSON.parse(localStorage.getItem('tasklist')) || []
   )
@@ -19,6 +19,7 @@ function App() {
       const date = new Date()
       const selectedTask = taskList.find((task) => task.id === editid)
       const updatedTask = taskList.map((e) => {
+
         e.id === selectedTask.id
           ? {
               id: e.id,
@@ -28,10 +29,28 @@ function App() {
           : { id: e.id, name: e.name, time: e.time }
       })
       setTaskList(updatedTask)
-      setTask('')
       setEditid(0)
+      setTask('')
       return
     }
+
+    // if (editid) {
+    //   const date = new Date()
+    //   const selectedTask = taskList.find((task) => task.id === editid)
+    //   const updateTask = taskList.map((e) =>
+    //     e.id === selectedTask.id
+    //       ? {
+    //           id: e.id,
+    //           name: task,
+    //           time: `${date.toLocaleTimeString()} ${date.toLocaleDateString()}`,
+    //         }
+    //       : { id: e.id, name: e.name, time: e.time }
+    //   )
+    //   setTaskList(updateTask)
+    //   setEditid(0)
+    //   setTask('')
+    //   return
+    // }
     if (task) {
       const date = new Date()
       setTaskList([
